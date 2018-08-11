@@ -23,4 +23,13 @@ public class Feed {
 	
 	private List<FeedMessage> items = new ArrayList<>();
 
+	public Feed(String title, String link, String description, String lastbuildDate, String docs, String generator) {
+		this.title = title;
+		this.link = link;
+		this.description = description;
+		this.lastbuildDate = lastbuildDate;
+		this.docs = docs;
+		this.generator = generator;
+	}
+	
 }
