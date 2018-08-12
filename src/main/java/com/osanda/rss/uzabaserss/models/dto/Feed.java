@@ -17,7 +17,7 @@ public class Feed {
 	private String title; 
 	private String link;
 	private String description; 
-	private String lastbuildDate;
+	private String lastBuildDate;
 	private String docs; 
 	private String generator;
 	
@@ -27,7 +27,7 @@ public class Feed {
 		this.title = title;
 		this.link = link;
 		this.description = description;
-		this.lastbuildDate = lastbuildDate;
+		this.lastBuildDate = lastbuildDate;
 		this.docs = docs;
 		this.generator = generator;
 	}
