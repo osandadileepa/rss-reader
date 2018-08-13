@@ -10,16 +10,17 @@ import {map} from "rxjs/operators";
 })
 export class HomeComponent implements OnInit {
 
-  private urlList : string [] = [];
+  private urlList: string [] = [];
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit() {
     this.urlList.push('http://tech.uzabase.com/rss');
     this.readRssFeed();
   }
 
-  private readRssFeed() : void{
+  private readRssFeed(): void {
 
     let url = environment.basePath + 'rss/read';
 
@@ -27,11 +28,11 @@ export class HomeComponent implements OnInit {
     params.append('urlList', this.urlList.toString());
 
     let readSub = this.http.get(url, {params}).pipe(
-      map((data :any) => {
+      map((data: any) => {
         console.log('Map ', data);
       })
     ).subscribe(
-      (value : any) => {
+      (value: any) => {
         readSub.unsubscribe();
       });
 

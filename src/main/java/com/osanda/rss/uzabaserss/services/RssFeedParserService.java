@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -286,7 +287,11 @@ public class RssFeedParserService implements RSSReadCommon {
 
 		ResponseEntity<Map<String, Feed>> readRssFeed = (ResponseEntity<Map<String, Feed>>) readRssFeed(null);
 		
-		File export = new File("data/rss/export.txt");
+		File path = new File("data/rss");
+		
+		if(!path.exists()) {
+			path.mkdirs();
+		}
 		
 		StringBuffer sb = new StringBuffer();
 
@@ -311,6 +316,7 @@ public class RssFeedParserService implements RSSReadCommon {
 			
 		});
 		
+		File export = new File("data/rss/" , "export-" + new Date().getTime() + ".txt");
 		
 		try {
 			OutputStream file = new FileOutputStream(export);
