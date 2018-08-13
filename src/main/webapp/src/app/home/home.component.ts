@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {map} from "rxjs/operators";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-home',
@@ -11,6 +11,9 @@ import {map} from "rxjs/operators";
 export class HomeComponent implements OnInit {
 
   private urlList: string [] = [];
+
+  public items : object [] = [];
+  public rssFeeds : { string , object};
 
   constructor(private http: HttpClient) {
   }
@@ -25,11 +28,17 @@ export class HomeComponent implements OnInit {
     let url = environment.basePath + 'rss/read';
 
     let params: HttpParams = new HttpParams();
-    params.append('urlList', this.urlList.toString());
+    params = params.append('urlList', this.urlList.toString());
 
     let readSub = this.http.get(url, {params}).pipe(
-      map((data: any) => {
-        console.log('Map ', data);
+      tap((data: any) => {
+
+        this.rssFeeds = <{string, object}>data;
+
+        this.urlList.forEach( url => {
+          this.items.push(this.rssFeeds[url]);
+        });
+
       })
     ).subscribe(
       (value: any) => {
@@ -37,5 +46,12 @@ export class HomeComponent implements OnInit {
       });
 
   }// readRssFeed()
+
+  public downloadFile () {
+
+    let url = environment.basePath + 'rss/download';
+    window.open(url);
+
+  }// downloadFile()
 
 }

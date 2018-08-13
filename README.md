@@ -1,4 +1,4 @@
-# uzabase-rss
+# rss-reader
 
 Test project that accepts a RSS feed and populate data accordingly
 

@@ -93,6 +93,8 @@ public class RssFeedParserService implements RSSReadCommon {
 				return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT)
 						.body(ResponseMessage.createResponse("Invalid RSS fedd."));
 			}
+			
+			log.info("Reading RSS Feed Details : " + s);
 
 			try {
 
@@ -183,6 +185,8 @@ public class RssFeedParserService implements RSSReadCommon {
 					}
 
 				} // End checking next xml
+				
+				log.info("RSS Feed Reading complete : " + s);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -193,6 +197,8 @@ public class RssFeedParserService implements RSSReadCommon {
 			feedMap.put(s, feed);
 
 		} // End url list iteration
+		
+		log.info("Rss Feed found : " + feedMap.size());
 
 		return ResponseEntity.ok(feedMap);
 
@@ -318,6 +324,8 @@ public class RssFeedParserService implements RSSReadCommon {
 		
 		File export = new File("data/rss/" , "export-" + new Date().getTime() + ".txt");
 		
+		log.info("Writing RSS feed details to Text File.");
+		
 		try {
 			OutputStream file = new FileOutputStream(export);
 			file.write(sb.toString().getBytes());
@@ -327,6 +335,8 @@ public class RssFeedParserService implements RSSReadCommon {
 		}
 		
 		this.writeFileToResponse(request, response, export);
+		
+		log.info("File download complete.");
 
 	}// createTextFileRss()
 
